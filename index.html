@@ -478,7 +478,7 @@
     <div class="floor"></div>
     <div class="poster-wrapper">
       <div class="bigger" id="bigger"></div>
-      <div class="poster">
+      <div class="poster" id="poster">
         <span>Мама!<br>С Днём Рождения!</span>
       </div>
     </div>
@@ -492,9 +492,21 @@
     const son = document.getElementById('son');
     const arti = document.getElementById('arti');
     const sister = document.getElementById('sister');
+
     const bigger = document.getElementById('bigger');
     const bigBigger = document.getElementById('big-bigger');
     const bigBiggerWrapper = document.getElementById('big-bigger-wrapper');
+
+    const poster = document.getElementById('poster');
+    const audio = new Audio('hit.mp3');
+    poster.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    });
+
     const all = [minisun, son, sister, arti, sun];
 
     all.forEach((child) => {
