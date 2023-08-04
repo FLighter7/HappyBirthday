@@ -9,6 +9,7 @@
   <style>
     * {
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
 
     html,
@@ -59,7 +60,6 @@
 
     .children {
       position: relative;
-      z-index: 1;
       overflow: hidden;
       display: flex;
       width: 100%;
@@ -150,13 +150,19 @@
       flex-direction: column;
     }
 
-    .poster {
+    .poster-wrapper {
       position: absolute;
-      width: 320px;
-      height: 180px;
       margin-top: 100px;
       margin-left: 20%;
-      background-color: #DCDCDC;
+    }
+
+    .poster {
+      position: relative;
+      z-index: 2;
+      width: 320px;
+      height: 180px;
+      background-color: black;
+      color: floralwhite;
       border: 5px solid #b3966d;
       display: inline-flex;
       justify-content: center;
@@ -167,7 +173,7 @@
     }
 
     @media (max-width: 430px) {
-      .poster {
+      .poster-wrapper {
         margin-top: 50px;
         margin-left: 1%;
         transform: scale(0.7);
@@ -178,16 +184,112 @@
       height: 20vh;
       background-color: #cbc4be;
     }
+
+    .sun,
+    .minisun,
+    .son,
+    .arti,
+    .sister {
+      position: relative;
+      z-index: 3;
+      transform-origin: bottom;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+      animation-timing-function: cubic-bezier(0.280, 0.840, 0.420, 1);
+      cursor: pointer;
+    }
+
+    .bigger {
+      z-index: 1;
+      background-color: rgb(247, 217, 53);
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      border-radius: 50% 50% 0 0;
+      border-bottom: 20px solid white;
+      box-sizing: content-box;
+      top: -40px;
+      right: 10px;
+      transition: 1s linear top;
+    }
+
+    .bigger::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: black;
+      bottom: -12px;
+      right: 2px;
+    }
+
+    .bigger_hidden {
+      top: 0;
+    }
+
+    .big-bigger-wrapper {
+      display: none;
+      position: absolute;
+      z-index: 4;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+
+    .big-bigger-wrapper_shown {
+      display: block;
+    }
+
+    .big-bigger {
+      background-color: rgb(247, 217, 53);
+      width: 30vmax;
+      height: 30vmax;
+      position: absolute;
+      border-radius: 50% 50% 0 0;
+      border-bottom: 20vmax solid white;
+      box-sizing: content-box;
+      bottom: -50vmax;
+      left: calc(50% - 15vmax);
+      transition: 2s linear bottom;
+    }
+
+    .big-bigger::after {
+      content: '';
+      position: absolute;
+      width: 6vmax;
+      height: 6vmax;
+      border-radius: 50%;
+      background-color: black;
+      bottom: -12vmax;
+      right: 2vmax;
+    }
+
+    .big-bigger_shown {
+      bottom: 0;
+    }
+
+    .animation-jump {
+        animation-name: jump;
+    }
+
+    @keyframes jump {
+        0%   { transform: scale(1,1)      translateY(0); }
+        10%  { transform: scale(1.1,.9)   translateY(0); }
+        30%  { transform: scale(.9,1.1)   translateY(-80px); }
+        50%  { transform: scale(1.05,.95) translateY(0); }
+        57%  { transform: scale(1,1)      translateY(-7px); }
+        64%  { transform: scale(1,1)      translateY(0); }
+        100% { transform: scale(1,1)      translateY(0); }
+    }
   </style>
 </head>
 <body>
   <div class="main">
-    <div class="poster">
-      <span>Мама!<br>С Днём Рождения!</span>
-    </div>
     <div class="children">
       <!-- SUN -->
-      <svg viewBox='0 0 400 400' class='sun'>
+      <svg viewBox='0 0 400 400' class='sun' id="sun">
         <g class='hoholok' fill='red'>
           <ellipse cx='200' cy='20' rx='10' ry='20' />
           <ellipse cx='180' cy='20' rx='10' ry='20' transform='rotate(-30 190 15)' />
@@ -231,7 +333,7 @@
       </svg>
       <!-- SUN END -->
       <!-- MINI SUN -->
-      <svg viewBox='0 0 400 400' class='minisun'>
+      <svg viewBox='0 0 400 400' class='minisun' id="minisun">
         <g class='hoholok' fill='red'>
           <ellipse cx='200' cy='20' rx='10' ry='20' />
           <ellipse cx='180' cy='20' rx='10' ry='20' transform='rotate(-30 190 15)' />
@@ -275,7 +377,7 @@
       </svg>
       <!-- MINI SUN END -->
       <!-- SUN's SON -->
-      <svg viewBox='0 0 400 400' class='son'>
+      <svg viewBox='0 0 400 400' class='son' id="son">
         <g class='hoholok' fill='red'>
           <ellipse cx='200' cy='30' rx='10' ry='20' /><!-- cy 20 -> 30 -->
           <ellipse cx='190' cy='20' rx='10' ry='20' transform='rotate(-30 200 15)' /><!-- 180 -> 190, 190 -> 200 -->
@@ -322,7 +424,7 @@
       </svg>
       <!-- SUN's SON END -->
       <!-- ARTI -->
-      <svg viewBox='0 0 400 400' class='arti'>
+      <svg viewBox='0 0 400 400' class='arti' id="arti">
         <g class='legs'>
           <ellipse cx='150' cy='374' rx='28' ry='18' fill='black' />
           <ellipse cx='250' cy='374' rx='28' ry='18' fill='black' />
@@ -349,7 +451,7 @@
       </svg>
       <!-- ARTI END -->
       <!-- SISTER -->
-      <svg viewBox='0 0 400 400' class='sister'>
+      <svg viewBox='0 0 400 400' class='sister' id="sister">
         <g>
           <ellipse class='body' cx='200' cy='210' rx='130' ry='120' fill='#a3a2a0' stroke='#a3a2a0' />
           <ellipse class='head' cx='200' cy='81' rx='100' ry='80' fill='#a3a2a0' />
@@ -374,6 +476,48 @@
       <!-- SISTER END -->
     </div>
     <div class="floor"></div>
+    <div class="poster-wrapper">
+      <div class="bigger" id="bigger"></div>
+      <div class="poster">
+        <span>Мама!<br>С Днём Рождения!</span>
+      </div>
+    </div>
   </div>
+  <div class="big-bigger-wrapper" id="big-bigger-wrapper">
+    <div class="big-bigger" id="big-bigger"></div>
+  </div>
+  <script>
+    const sun = document.getElementById('sun');
+    const minisun = document.getElementById('minisun');
+    const son = document.getElementById('son');
+    const arti = document.getElementById('arti');
+    const sister = document.getElementById('sister');
+    const bigger = document.getElementById('bigger');
+    const bigBigger = document.getElementById('big-bigger');
+    const bigBiggerWrapper = document.getElementById('big-bigger-wrapper');
+    const all = [minisun, son, sister, arti, sun];
+
+    all.forEach((child) => {
+      child.addEventListener('click', () => child.classList.toggle('animation-jump'));
+    });
+
+    bigger.addEventListener('click', () => {
+      const smallTime = 1000;
+      const bigTime = 2000;
+      const delay = 1000;
+      bigBiggerWrapper.classList.add('big-bigger-wrapper_shown');
+      bigger.classList.add('bigger_hidden');
+      setTimeout(() => {
+        bigBigger.classList.add('big-bigger_shown');
+      }, smallTime + delay);
+      setTimeout(() => {
+        bigBigger.classList.remove('big-bigger_shown');
+      }, smallTime + delay + bigTime + delay * 2);
+      setTimeout(() => {
+        bigger.classList.remove('bigger_hidden');
+        bigBiggerWrapper.classList.remove('big-bigger-wrapper_shown');
+      }, smallTime + delay + bigTime + delay * 2 + bigTime + delay);
+    });
+  </script>
 </body>
 </html>
