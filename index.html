@@ -30,12 +30,18 @@
       height: 400px;
     }
 
+    :root {
+      --blinchik-size: 400px;
+    }
+
     .blinchik {
       position: absolute;
-      width: 400px;
-      height: 400px;
+      width: var(--blinchik-size);
+      height: var(--blinchik-size);
       right: 0;
       bottom: -21px;
+      cursor: pointer;
+      z-index: 3;
     }
 
     .minisun {
@@ -101,9 +107,11 @@
         margin-right: 0;
       }
 
+      :root {
+        --blinchik-size: 200px;
+      }
+
       .blinchik {
-        width: 200px;
-        height: 200px;
         bottom: -10px;
       }
 
@@ -207,7 +215,7 @@
     .arti,
     .sister {
       position: relative;
-      z-index: 3;
+      z-index: 4;
       transform-origin: bottom;
       animation-duration: 2s;
       animation-iteration-count: infinite;
@@ -393,8 +401,24 @@
         100% { transform: scale(1,1)      translateY(0); }
     }
 
+    @keyframes rotato {
+        0%, 2% {
+          right: 0;
+          transform: rotate(0deg);
+        }
+
+        98%, 100% {
+          transform: rotate(-360deg);
+          right: calc(100% - var(--blinchik-size));
+        }
+    }
+
     .blinchik .cheek {
       filter: url(#blur);
+    }
+
+    .blinchik {
+      animation: 5s ease-in-out 0s alternate none infinite paused rotato;
     }
   </style>
 </head>
@@ -661,6 +685,7 @@
     const arti = document.getElementById('arti');
     const sister = document.getElementById('sister');
     const kuritsyn = document.getElementById('kuritsyn');
+    const blinchik = document.getElementById('blinchik');
 
     const bigger = document.getElementById('bigger');
     const bigBigger = document.getElementById('big-bigger');
@@ -685,6 +710,13 @@
 
     all.forEach((child) => {
       child.addEventListener('click', () => child.classList.toggle('animation-jump'));
+    });
+
+    blinchik.addEventListener('click', () => {
+      const state = blinchik.style.animationPlayState;
+      blinchik.style.animationPlayState = state === 'paused' || state === ''
+        ? 'running'
+        : 'paused';
     });
 
     bigger.addEventListener('click', () => {
