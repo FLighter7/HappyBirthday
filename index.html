@@ -201,6 +201,97 @@
       cursor: pointer;
     }
 
+    .kuritsyn {
+      z-index: 1;
+      background-color: rgb(247, 217, 53);
+      width: 16px;
+      height: 30px;
+      position: absolute;
+      border-radius: 50%;
+      top: -50px;
+      left: 10px;
+      cursor: pointer;
+    }
+
+    .kuritsyn__hoholok {
+      position: absolute;
+      background-color: red;
+      width: 4px;
+      height: 10px;
+      border-radius: 50% 50% 40% 40%;
+      bottom: 100%;
+      left: calc(50% - 2px);
+    }
+
+    .kuritsyn__eye {
+      width: 4px;
+      height: 6px;
+      background-color: white;
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      border-radius: 50%;
+    }
+
+    .kuritsyn__eye::before {
+      content: '';
+      position: absolute;
+      width: 2px;
+      height: 3px;
+      border-radius: 50%;
+      background-color: black;
+      top: 1px;
+      left: 1px;
+    }
+
+    .kuritsyn__eye_right {
+      left: auto;
+      right: 4px;
+    }
+
+    .kuritsyn__mouth {
+      position: absolute;
+      border: 1px solid red;
+      border-radius: 50%;
+      width: 8px;
+      height: 18px;
+      left: calc(50% - 4px);
+      bottom: 3px;
+    }
+
+    .kuritsyn__mouth::before {
+      content: '';
+      position: absolute;
+      width: 4px;
+      height: 3px;
+      background-color: red;
+      border-radius: 50% 0 0 50%;
+      left: -5px;
+      bottom: -2px;
+      transform: rotate(-50deg);
+    }
+
+    .kuritsyn__mouth::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      height: 3px;
+      background-color: red;
+      border-radius: 0 50% 50% 0;
+      right: -5px;
+      bottom: -2px;
+      transform: rotate(50deg);
+    }
+
+    .kuritsyn__body {
+      position: absolute;
+      width: 10px;
+      height: 30px;
+      background-color: rgb(247, 217, 53);
+      top: 90%;
+      left: calc(50% - 5px);
+    }
+
     .bigger {
       z-index: 1;
       background-color: rgb(247, 217, 53);
@@ -481,6 +572,15 @@
     </div>
     <div class="floor"></div>
     <div class="poster-wrapper">
+      <div class="kuritsyn" id="kuritsyn">
+        <div class="kuritsyn__hoholok"></div>
+        <div class="kuritsyn__eyes">
+          <div class="kuritsyn__eye kuritsyn__eye_left"></div>
+          <div class="kuritsyn__eye kuritsyn__eye_right"></div>
+        </div>
+        <div class="kuritsyn__mouth"></div>
+        <div class="kuritsyn__body"></div>
+      </div>
       <div class="bigger" id="bigger"></div>
       <div class="poster" id="poster">
         <span>Мама!<br>С Днём Рождения!</span>
