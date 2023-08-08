@@ -30,6 +30,14 @@
       height: 400px;
     }
 
+    .blinchik {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      right: 0;
+      bottom: -21px;
+    }
+
     .minisun {
       position: relative;
       width: 50px;
@@ -91,6 +99,12 @@
         width: 200px;
         height: 200px;
         margin-right: 0;
+      }
+
+      .blinchik {
+        width: 200px;
+        height: 200px;
+        bottom: -10px;
       }
 
       .arti {
@@ -378,11 +392,61 @@
         64%  { transform: scale(1,1)      translateY(0); }
         100% { transform: scale(1,1)      translateY(0); }
     }
+
+    .blinchik .cheek {
+      filter: url(#blur);
+    }
   </style>
 </head>
 <body>
   <div class="main">
     <div class="children">
+      <!-- BLINCHIK -->
+      <svg viewBox='0 0 400 400' class='blinchik' id="blinchik">
+        <filter id='blur' color-interpolation-filters="sRGB">
+          <feGaussianBlur stdDeviation='4' />
+        </filter>
+        <clipPath id="cut-off-bottom">
+          <rect x="30" y="150" width="340" height="340" />
+        </clipPath>
+        <g class='hands'>
+          <ellipse cx='32' cy='200' rx='24' ry='30' fill='silver' transform='rotate(5 32 200)' />
+          <ellipse cx='365' cy='200' rx='24' ry='30' fill='silver' transform='rotate(-5 365 200)' />
+        </g>
+        <g class='legs'>
+          <g class='legs__left'>
+            <ellipse cx='128' cy='355' rx='16' ry='24' fill='#FFE4B5' transform='rotate(15 133 388)' />
+            <ellipse cx='102' cy='360' rx='12' ry='24' fill='#FFE4B5' transform='rotate(30 133 394)' />
+            <ellipse cx='156' cy='360' rx='12' ry='24' fill='#FFE4B5' transform='rotate(-15 135 380)' />
+          </g>
+          <g class='legs__right'>
+             <ellipse cx='272' cy='355' rx='16' ry='24' fill='#FFE4B5' transform='rotate(-15 267 388)' />
+            <ellipse cx='298' cy='360' rx='12' ry='24' fill='#FFE4B5' transform='rotate(-30 267 394)' />
+            <ellipse cx='244' cy='360' rx='12' ry='24' fill='#FFE4B5' transform='rotate(15 267 394)' />
+          </g>
+        </g>
+        <circle class='body' cx='200' cy='200' r='170' fill='silver' stroke='silver' />
+        <circle class='body' cx='200' cy='200' r='170' fill='white' stroke='silver' clip-path="url(#cut-off-bottom)" />
+        <g class='face'>
+          <g class='eyes'>
+            <ellipse cx='150' cy='150' rx='30' ry='50' fill='white' />
+            <ellipse cx='250' cy='150' rx='30' ry='50' fill='white' />
+            <path d="M 140 136 A 50 200 0 0 1 160 136" fill='none' stroke='black' stroke-width='3' />
+            <path d="M 240 136 A 50 200 0 0 1 260 136" fill='none' stroke='black' stroke-width='3' />
+          </g>
+          <g class='cheeks'>
+            <circle cx='100' cy='175' r='20' fill='pink' class='cheek' />
+            <circle cx='300' cy='175' r='20' fill='pink' class='cheek' />
+          </g>
+          <g class='mouth'>
+            <ellipse cx='200' cy='150' rx='30' ry='10' fill='#FFE4B5' />
+            <ellipse cx='200' cy='170' rx='30' ry='10' fill='#FFE4B5' />
+            <rect x='170' y='150' width='60' height='20' fill='#FFE4B5' />
+            <path d='M 172,165 A 172,205 0 0 0 228,165' fill='orange' />
+          </g>
+        </g>
+      </svg>
+      <!-- BLINCHIK END -->
       <!-- SUN -->
       <svg viewBox='0 0 400 400' class='sun' id="sun">
         <g class='hoholok' fill='red'>
